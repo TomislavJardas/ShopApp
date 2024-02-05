@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Items List</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .navbar-custom {
+      background-color: #343a40;
+    }
+    .navbar-custom .navbar-brand, .navbar-custom .nav-link {
+      color: #ffffff;
+    }
+    .navbar-custom .nav-link:hover {
+      color: #cccccc;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <a class="navbar-brand" th:href="@{/home}">Home</a>
+  <div class="collapse navbar-collapse justify-content-end">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" th:href="@{/logout}">Log Out</a>
+      <a class="nav-item nav-link" th:href="@{/cart}">Cart</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <h2>Items List</h2>
+  <div class="mb-3">
+    <a th:href="@{/item/add}" class="btn btn-success">Add Item</a>
+  </div>
+  <a th:href="@{/authentication/users}" class="btn btn-primary btn-sm">Users</a>
+  <a th:href="@{/category}" class="btn btn-primary btn-sm">Categorys</a>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${items}">
+      <td th:text="${item.title}">Title</td>
+      <td th:text="${item.description}">Description</td>
+      <td th:text="${'$'} + ${item.price}">Price</td>
+      <td>
+        <a th:href="@{/item/edit/{id}(id=${item.id})}" class="btn btn-primary btn-sm">Edit</a>
+        <a th:href="@{/item/delete/{id}(id=${item.id})}" class="btn btn-danger btn-sm">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

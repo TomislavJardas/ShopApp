@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Items Catalog</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Custom navbar styling */
+    .navbar-custom {
+      background-color: #343a40; /* Similar to Chrome dark mode color */
+    }
+    .navbar-custom .navbar-brand, .navbar-custom .nav-link {
+      color: #ffffff; /* White text color for contrast */
+    }
+    .navbar-custom .nav-link:hover {
+      color: #cccccc; /* Lighter shade for hover effect */
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <a class="navbar-brand nav-link active" th:href="@{/HomePage}">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-link active" aria-current="page" th:href="@{/authentication/login}">Login</a>
+      <a class="nav-link active" aria-current="page" th:href="@{/cart}">Cart</a>
+    </div>
+  </div>
+</nav>
+<div class="container mt-5 item-type-section">
+  <h3>Item Types</h3>
+  <div class="row">
+    <div th:each="itemType : ${items}" class="col-md-3">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${itemType.category.name}">Item Type Name</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container mt-5">
+  <h2 class="mb-4">Items Catalog</h2>
+  <div class="row">
+    <div th:each="item : ${items}" class="col-md-4">
+      <div class="card">
+        <img th:src="@{${item.image}}" class="card-img-top" alt="Item Image"/>
+        <div class="card-body">
+          <h5 class="card-title" th:text="${item.title}">Item Title</h5>
+          <p class="card-text" th:text="'$' + ${item.price}">Item Price</p>
+
+          <form th:action="@{/cart/add}" method="post">
+            <input type="hidden" name="itemId" th:value="${item.id}"/>
+            <input type="number" name="quantity" value="1" min="1"/>
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

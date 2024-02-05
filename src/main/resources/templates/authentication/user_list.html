@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User List</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <style>
+    .navbar-custom {
+      background-color: #343a40;
+    }
+    .navbar-custom .navbar-brand, .navbar-custom .nav-link {
+      color: #ffffff;
+    }
+    .navbar-custom .nav-link:hover {
+      color: #cccccc;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <a class="navbar-brand" th:href="@{/home}">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" th:href="@{/authentication/login}" th:action="@{/logout}">Logout</a>
+      <a class="nav-item nav-link" th:href="@{/cart}">Cart</a>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container mt-5">
+  <h2>User List</h2>
+  <a th:href="@{/item}" class="btn btn-primary btn-sm">Items</a>
+  <a th:href="@{/category}" class="btn btn-primary btn-sm">Categorys</a>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+      <td th:text="${user.username}">Username</td>
+      <td th:text="${user.email}">Email</td>
+      <td>
+        <a th:href="@{/user/edit/{id}(id=${user.id})}" class="btn btn-primary btn-sm">Edit</a>
+        <a th:href="@{/user/delete/{id}(id=${user.id})}" class="btn btn-danger btn-sm">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

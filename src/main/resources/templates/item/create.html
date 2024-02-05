@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Item</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .navbar-custom {
+      background-color: #343a40;
+    }
+    .navbar-custom .navbar-brand, .navbar-custom .nav-link {
+      color: #ffffff;
+    }
+    .navbar-custom .nav-link:hover {
+      color: #cccccc;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <a class="navbar-brand" th:href="@{/home}">Home</a>
+  <div class="collapse navbar-collapse justify-content-end">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" th:href="@{/logout}">Log Out</a>
+      <a class="nav-item nav-link" th:href="@{/cart}">Cart</a>
+    </div>
+  </div>
+</nav>
+<div class="container mt-5">
+  <h2>Create Item</h2>
+  <form th:action="@{/item/save}" th:object="${item}" method="post">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" class="form-control" th:value="*{item.title}" required />
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" class="form-control" th:text="*{item.description}" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" step="0.01" id="price" name="price" class="form-control" th:value="*{item.price}" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+</body>
+</html>

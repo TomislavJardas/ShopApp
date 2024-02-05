@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Options</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+  <h2>Choose Your Payment Method</h2>
+  <form th:action="@{/payment_options}" method="post">
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="paymentMethod" id="payInStore" value="payInStore" checked>
+      <label class="form-check-label" for="payInStore">
+        Pay in Store
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="paymentMethod" id="payPal" value="payPal">
+      <label class="form-check-label" for="payPal">
+        PayPal
+      </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Proceed to Payment</button>
+  </form>
+  <a class="navbar-brand" th:href="@{/home}">return to shop</a>
+</div>
+
+</body>
+</html>
